@@ -64,10 +64,10 @@ class OrderManager
 
 class Order
 {
-    public string _productName;
-    public int _count;
-    public string _name;
-    public string _address;
+    private string _productName;
+    private int _count;
+    private string _name;
+    private string _address;
 
     public void SetProductName( string productNamee )
     {
