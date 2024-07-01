@@ -1,106 +1,109 @@
-﻿OrderManager orderManager = new OrderManager();
+﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+
+OrderManager orderManager = new OrderManager();
 orderManager.InputData();
-while (!orderManager.CheckOrder())
+while ( !orderManager.CheckOrder() )
 {
-    Console.WriteLine("Введите данные еще раз");
+    Console.WriteLine( "Введите данные еще раз" );
     orderManager.InputData();
 }
 orderManager.SuccessfulOrdering();
 
 class OrderManager
 {
-    private Order m_order = new Order();
+    private Order _order = new Order();
 
 
     public void SuccessfulOrdering()
     {
-        string productName = m_order.GetProductName();
-        int count = m_order.GetCount();
-        string name = m_order.GetName();
-        string address = m_order.GetAddress();
+        string productName = _order.GetProductName();
+        int count = _order.GetCount();
+        string name = _order.GetName();
+        string address = _order.GetAddress();
+        DateTime date = DateTime.Today.AddDays( 3 );
 
-        Console.WriteLine($"{name}! Ваш заказ {productName} в количестве {count} оформлен! Ожидайте доставку по адресу {address} к {{todays_date + 3_days}}");
+        Console.WriteLine( $"{name}! Ваш заказ {productName} в количестве {count} оформлен! Ожидайте доставку по адресу {address} к {date.ToShortDateString()}" );
     }
     public bool CheckOrder()
     {
-        string productName = m_order.GetProductName();
-        int count = m_order.GetCount();
-        string name = m_order.GetName();
-        string address = m_order.GetAddress();
+        string productName = _order.GetProductName();
+        int count = _order.GetCount();
+        string name = _order.GetName();
+        string address = _order.GetAddress();
 
-        Console.WriteLine($"Здравствуйте, {name}, вы заказали {count} {productName} на адрес {address}, все верно? Ответ в виде Да/Нет");
+        Console.WriteLine( $"Здравствуйте, {name}, вы заказали {count} {productName} на адрес {address}, все верно? Ответ в виде Да/Нет" );
         string answer = Console.ReadLine();
-        return (answer == "Да") ? true : false;
+        return ( answer == "Да" );
     }
     public void InputData()
     {
-        Console.WriteLine("Введите название товара: ");
+        Console.WriteLine( "Введите название товара: " );
         string productName = Console.ReadLine();
-        m_order.SetProductName(productName);
+        _order.SetProductName( productName );
 
-        Console.WriteLine("Введите количество товара: ");
+        Console.WriteLine( "Введите количество товара: " );
         string countStr = Console.ReadLine();
-        if(int.TryParse(countStr, out int count))
+        if ( int.TryParse( countStr, out int count ) )
         {
-            m_order.SetCount(count);
+            _order.SetCount( count );
         }
         else
         {
-            Console.WriteLine("Неверные данные. Введите число");
+            Console.WriteLine( "Неверные данные. Введите число" );
         }
 
-        Console.WriteLine("Введите ваше имя: ");
+        Console.WriteLine( "Введите ваше имя: " );
         string name = Console.ReadLine();
-        m_order.SetName(name);
+        _order.SetName( name );
 
-        Console.WriteLine("Введите адрес доставки: ");
+        Console.WriteLine( "Введите адрес доставки: " );
         string address = Console.ReadLine();
-        m_order.SetAddress(address);
+        _order.SetAddress( address );
     }
 }
 
 class Order
 {
-    public string m_productName;
-    public int m_count;
-    public string m_name;
-    public string m_address;
+    public string _productName;
+    public int _count;
+    public string _name;
+    public string _address;
 
-    public void SetProductName(string productNamee)
+    public void SetProductName( string productNamee )
     {
-        m_productName = productNamee;
+        _productName = productNamee;
     }
 
-    public void SetCount(int count)
+    public void SetCount( int count )
     {
-        m_count = count;
+        _count = count;
     }
 
-    public void SetName(string name)
+    public void SetName( string name )
     {
-        m_name = name;
+        _name = name;
     }
 
-    public void SetAddress(string address)
+    public void SetAddress( string address )
     {
-        m_address = address;
+        _address = address;
     }
 
     public string GetProductName()
     {
-        return m_productName;
+        return _productName;
     }
 
     public int GetCount()
     {
-        return m_count;
+        return _count;
     }
     public string GetName()
     {
-        return m_name;
+        return _name;
     }
     public string GetAddress()
     {
-        return m_address;
+        return _address;
     }
 }
