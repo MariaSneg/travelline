@@ -1,6 +1,4 @@
-﻿//using static System.Runtime.InteropServices.JavaScript.JSType;
-
-OrderManager orderManager = new OrderManager();
+﻿OrderManager orderManager = new OrderManager();
 orderManager.InputData();
 while ( !orderManager.CheckOrder() )
 {
@@ -15,20 +13,20 @@ class OrderManager
 
     public void SuccessfulOrdering()
     {
-        string productName = _order.GetProductName();
-        int count = _order.GetCount();
-        string name = _order.GetName();
-        string address = _order.GetAddress();
+        string productName = _order.ProductName;
+        int count = _order.Count;
+        string name = _order.Name;
+        string address = _order.Address;
         DateTime date = DateTime.Today.AddDays( 3 );
 
         Console.WriteLine( $"{name}! Ваш заказ {productName} в количестве {count} оформлен! Ожидайте доставку по адресу {address} к {date.ToShortDateString()}" );
     }
     public bool CheckOrder()
     {
-        string productName = _order.GetProductName();
-        int count = _order.GetCount();
-        string name = _order.GetName();
-        string address = _order.GetAddress();
+        string productName = _order.ProductName;
+        int count = _order.Count;
+        string name = _order.Name;
+        string address = _order.Address;
 
         Console.WriteLine( $"Здравствуйте, {name}, вы заказали {count} {productName} на адрес {address}, все верно? Ответ в виде Да/Нет" );
         string answer = Console.ReadLine();
@@ -38,26 +36,24 @@ class OrderManager
     {
         Console.WriteLine( "Введите название товара: " );
         string productName = Console.ReadLine();
-        _order.SetProductName( productName );
+        _order.ProductName = productName ;
 
         Console.WriteLine( "Введите количество товара: " );
         string countStr = Console.ReadLine();
-        if ( int.TryParse( countStr, out int count ) )
-        {
-            _order.SetCount( count );
-        }
-        else
+        int count;
+        while ( !int.TryParse( countStr, out count ) )
         {
             Console.WriteLine( "Неверные данные. Введите число" );
         }
+        _order.Count = count;
 
         Console.WriteLine( "Введите ваше имя: " );
         string name = Console.ReadLine();
-        _order.SetName( name );
+        _order.Name = name ;
 
         Console.WriteLine( "Введите адрес доставки: " );
         string address = Console.ReadLine();
-        _order.SetAddress( address );
+        _order.Address = address ;
     }
 }
 
@@ -68,41 +64,29 @@ class Order
     private string _name;
     private string _address;
 
-    public void SetProductName( string productNamee )
+    public string ProductName
     {
-        _productName = productNamee;
+        get { return _productName; }
+
+        set { _productName = value; }
     }
 
-    public void SetCount( int count )
+    public int Count
     {
-        _count = count;
-    }
+        get { return _count; }
 
-    public void SetName( string name )
-    {
-        _name = name;
+        set { _count = value; }
     }
+    public string Name
+    {
+        get { return _name; }
 
-    public void SetAddress( string address )
-    {
-        _address = address;
+        set { _name = value; }
     }
+    public string Address
+    {
+        get { return _address; }
 
-    public string GetProductName()
-    {
-        return _productName;
-    }
-
-    public int GetCount()
-    {
-        return _count;
-    }
-    public string GetName()
-    {
-        return _name;
-    }
-    public string GetAddress()
-    {
-        return _address;
+        set { _address = value; }
     }
 }
