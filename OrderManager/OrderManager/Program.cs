@@ -1,4 +1,4 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿//using static System.Runtime.InteropServices.JavaScript.JSType;
 
 OrderManager orderManager = new OrderManager();
 orderManager.InputData();
@@ -12,7 +12,6 @@ orderManager.SuccessfulOrdering();
 class OrderManager
 {
     private Order _order = new Order();
-
 
     public void SuccessfulOrdering()
     {
