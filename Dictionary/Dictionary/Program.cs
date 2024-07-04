@@ -17,10 +17,10 @@ while ( true )
     }
 
     string translation = engToRusDict.TranslateWord( word );
-    if ( translation == "")
+    if ( translation == "" )
     {
         translation = rusToEngDict.TranslateWord( word );
-        if( translation == "")
+        if ( translation == "" )
         {
             NewWord();
             continue;
@@ -33,11 +33,11 @@ void NewWord()
 {
     Console.WriteLine( "Неизвестное слово. Добавить его в словарь? Для согласия введите Y или y" );
     string answer = Console.ReadLine();
-    if ( answer == "y")
+    if ( answer == "y" )
     {
         Console.WriteLine( "Введите новое слово на английском" );
         string newWord = Console.ReadLine();
-        Console.WriteLine("Введите слово на русском");
+        Console.WriteLine( "Введите слово на русском" );
         string newTranslation = Console.ReadLine();
         engToRusDict.AddNewWord( newWord, newTranslation );
         rusToEngDict.AddNewWord( newWord, newTranslation );

@@ -4,19 +4,19 @@
     private bool _isReverse;
     private bool _isChanged = false;
 
-    public CDictionary( bool IsReverse ) 
+    public CDictionary( bool IsReverse )
     {
         _isReverse = IsReverse;
     }
 
-   public void ParseDictionary(string NameFile)
+    public void ParseDictionary( string NameFile )
     {
-        StreamReader file = new StreamReader(NameFile);
+        StreamReader file = new StreamReader( NameFile );
         string line = file.ReadLine();
-        while (line != null)
+        while ( line != null )
         {
             string[] parts = line.Split( ':' );
-            if (_isReverse)
+            if ( _isReverse )
             {
                 _dict[ parts[ 1 ] ] = parts[ 0 ];
             }
@@ -28,22 +28,22 @@
         }
     }
 
-    public string TranslateWord(string word)
+    public string TranslateWord( string word )
     {
-        if(_dict.TryGetValue(word, out string translation))
+        if ( _dict.TryGetValue( word, out string translation ) )
         {
-            return translation; 
+            return translation;
         }
         return "";
     }
 
-    public void AddNewWord(string word, string translation )
+    public void AddNewWord( string word, string translation )
     {
-        if (!string.IsNullOrEmpty(translation) && !string.IsNullOrEmpty( translation ) )
+        if ( !string.IsNullOrEmpty( translation ) && !string.IsNullOrEmpty( translation ) )
         {
-            if (_isReverse)
+            if ( _isReverse )
             {
-                _dict[ translation ] = word; 
+                _dict[ translation ] = word;
                 return;
             }
             _dict[ word ] = translation;
@@ -55,14 +55,14 @@
         }
     }
 
-    public void SaveChanges(string NameFile)
+    public void SaveChanges( string NameFile )
     {
-        if(_isChanged)
+        if ( _isChanged )
         {
-            StreamWriter file = new StreamWriter(NameFile);
-            foreach (var translate in _dict )
+            StreamWriter file = new StreamWriter( NameFile );
+            foreach ( var translate in _dict )
             {
-                file.WriteLine($"{translate.Key}:{translate.Value}");
+                file.WriteLine( $"{translate.Key}:{translate.Value}" );
             }
         }
     }
