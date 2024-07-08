@@ -9,7 +9,7 @@ Console.WriteLine( "Для выхода введите '...'" );
 string word;
 while ( true )
 {
-    word = Console.ReadLine();
+    word = Console.ReadLine().ToLower();
     if ( word == "..." )
     {
         engToRusDict.SaveChanges( fileName );
@@ -32,7 +32,7 @@ while ( true )
 void NewWord()
 {
     Console.WriteLine( "Неизвестное слово. Добавить его в словарь? Для согласия введите Y или y" );
-    string answer = Console.ReadLine();
+    string answer = Console.ReadLine().ToLower();
     if ( answer == "y" )
     {
         Console.WriteLine( "Введите новое слово на английском" );
