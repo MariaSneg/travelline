@@ -9,22 +9,24 @@
         _isReverse = IsReverse;
     }
 
-    public void ParseDictionary( string NameFile )
+    public void ParseDictionary( string fileName )
     {
-        StreamReader file = new StreamReader( NameFile );
-        string line = file.ReadLine();
-        while ( line != null )
+        using ( StreamReader file = new StreamReader( fileName ) )
         {
-            string[] parts = line.Split( ':' );
-            if ( _isReverse )
+            string line = file.ReadLine();
+            while ( line != null )
             {
-                _dict[ parts[ 1 ] ] = parts[ 0 ];
+                string[] parts = line.Split( ':' );
+                if ( _isReverse )
+                {
+                    _dict[ parts[ 1 ] ] = parts[ 0 ];
+                }
+                else
+                {
+                    _dict[ parts[ 0 ] ] = parts[ 1 ];
+                }
+                line = file.ReadLine();
             }
-            else
-            {
-                _dict[ parts[ 0 ] ] = parts[ 1 ];
-            }
-            line = file.ReadLine();
         }
     }
 
@@ -37,14 +39,19 @@
         return "";
     }
 
-    public void AddNewWord( string word, string translation )
+    public bool AddNewWord( string word, string translation )
     {
         if ( !string.IsNullOrEmpty( translation ) && !string.IsNullOrEmpty( translation ) )
         {
+            if ( _dict.ContainsKey( word ) )
+            {
+                Console.WriteLine( "Слово уже есть в словаре" );
+                return false;
+            }
             if ( _isReverse )
             {
                 _dict[ translation ] = word;
-                return;
+                return true;
             }
             _dict[ word ] = translation;
             _isChanged = true;
@@ -53,16 +60,19 @@
         {
             Console.WriteLine( "Слово проигнорировано" );
         }
+        return true;
     }
 
-    public void SaveChanges( string NameFile )
+    public void SaveChanges( string fileName )
     {
         if ( _isChanged )
         {
-            StreamWriter file = new StreamWriter( NameFile );
-            foreach ( var translate in _dict )
+            using ( StreamWriter file = new StreamWriter( fileName ) )
             {
-                file.WriteLine( $"{translate.Key}:{translate.Value}" );
+                foreach ( var translate in _dict )
+                {
+                    file.WriteLine( $"{translate.Key}:{translate.Value}" );
+                }
             }
         }
     }
