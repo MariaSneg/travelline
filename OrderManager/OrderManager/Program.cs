@@ -1,4 +1,6 @@
-﻿OrderManager orderManager = new OrderManager();
+﻿using OrderManager;
+
+COrderManager orderManager = new COrderManager();
 orderManager.InputData();
 while ( !orderManager.CheckOrder() )
 {
