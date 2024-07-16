@@ -111,7 +111,7 @@ public class BookingService : IBookingService
 
         query = query.Where( b => b.StartDate >= startDate );
 
-        query = query.Where( b => b.EndDate < endDate );
+        query = query.Where( b => b.EndDate <= endDate ); //исправила сравнение
 
         if ( !string.IsNullOrEmpty( categoryName ) )
         {
