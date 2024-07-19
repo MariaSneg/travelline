@@ -1,9 +1,7 @@
-﻿CDictionary engToRusDict = new CDictionary( false );
-CDictionary rusToEngDict = new CDictionary( true );
+﻿Dictionary dict = new Dictionary();
 
-string fileName = "C:\\Programming\\travalline\\Dictionary\\Dictionary\\dict.txt";
-engToRusDict.ParseDictionary( fileName );
-rusToEngDict.ParseDictionary( fileName );
+string fileName = "dict.txt";
+dict.ParseDictionary( fileName );
 
 string command = "";
 while ( command != "3" )
@@ -25,7 +23,7 @@ while ( command != "3" )
             break;
     }
 }
-engToRusDict.SaveChanges( fileName );
+dict.SaveChanges( fileName );
 
 
 void PrintMenu()
@@ -41,24 +39,20 @@ void TranslateWord()
     Console.WriteLine( "Введите слово:" );
     string word = Console.ReadLine().ToLower();
 
-    string translation = engToRusDict.TranslateWord( word );
+    string translation = dict.TranslateWord( word );
     if ( translation == "" )
     {
-        translation = rusToEngDict.TranslateWord( word );
-        if ( translation == "" )
+        Console.WriteLine( "Неизвестное слово. Добавить его в словарь? Для согласия введите Y или y" );
+        string answer = Console.ReadLine().ToLower();
+        if ( answer == "y" )
         {
-            Console.WriteLine( "Неизвестное слово. Добавить его в словарь? Для согласия введите Y или y" );
-            string answer = Console.ReadLine().ToLower();
-            if ( answer == "y" )
-            {
-                NewWord();
-            }
-            else
-            {
-                Console.WriteLine( "Слово проигнорировано" );
-            }
+            NewWord();
+            return;
         }
+        Console.WriteLine( "Слово проигнорировано" );
+        return;
     }
+    Console.WriteLine( translation );
 }
 
 void NewWord()
@@ -69,7 +63,7 @@ void NewWord()
     Console.WriteLine( "Введите слово на русском" );
     string newTranslation = Console.ReadLine();
 
-    if ( engToRusDict.AddNewWord( newWord, newTranslation ) && rusToEngDict.AddNewWord( newWord, newTranslation ) )
+    if ( dict.AddNewWord( newWord, newTranslation ) )
     {
         Console.WriteLine( "Слово добавлено в словарь" );
     }
