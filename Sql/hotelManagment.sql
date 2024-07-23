@@ -51,6 +51,8 @@ IF NOT EXISTS (SELECT * FROM sysobjects WHERE name = 'room_to_facility')
 		facility_id INT NOT NULL,
 		room_id INT NOT NULL,
 
+		CONSTRAINT PK_room_to_facility PRIMARY KEY (facility_id, room_id),
+
 		CONSTRAINT FK_room_to_facility_facility_id FOREIGN KEY (facility_id) REFERENCES HotelManagement.dbo.facility (facility_id),
 		CONSTRAINT FK_room_to_facility_room_id FOREIGN KEY (room_id) REFERENCES HotelManagement.dbo.room (room_id)
 	);
@@ -114,27 +116,27 @@ VALUES
 	(7, 6),
 	(8, 3);
 
---Найдите все доступные номера для бронирования сегодня.
+--РќР°Р№РґРёС‚Рµ РІСЃРµ РґРѕСЃС‚СѓРїРЅС‹Рµ РЅРѕРјРµСЂР° РґР»СЏ Р±СЂРѕРЅРёСЂРѕРІР°РЅРёВ¤ СЃРµРіРѕРґРЅСЏ.
 SELECT * FROM dbo.room 
 WHERE availability = 1;
 
---Найдите всех клиентов, чьи фамилии начинаются с буквы "S".
+--РќР°Р№РґРёС‚Рµ РІСЃРµС… РєР»РёРµРЅС‚РѕРІ, С‡СЊРё С„Р°РјРёР»РёРё РЅР°С‡РёРЅР°СЋС‚СЃСЏ СЃ Р±СѓРєРІС‹ "S".
 SELECT * FROM dbo.customer
 WHERE last_name LIKE 'S%';
 
---Найдите все бронирования для определенного клиента (по имени или электронному адресу).
+--РќР°Р№РґРёС‚Рµ РІСЃРµ Р±СЂРѕРЅРёСЂРѕРІР°РЅРёСЏ РґР»СЏ РѕРїСЂРµРґРµР»РµРЅРЅРѕРіРѕ РєР»РёРµРЅС‚Р° (РїРѕ РёРјРµРЅРё РёР»Рё СЌР»РµРєС‚СЂРѕРЅРЅРѕРјСѓ Р°РґСЂРµСЃСѓ).
 SELECT * FROM booking
 WHERE customer_id IN (
 	SELECT customer_id FROM dbo.customer
 	WHERE first_name = 'Margaret' AND last_name = 'Hale');
 
---Найдите все бронирования для определенного номера.
+--РќР°Р№РґРёС‚Рµ РІСЃРµ Р±СЂРѕРЅРёСЂРѕРІР°РЅРёСЏ РґР»СЏ РѕРїСЂРµРґРµР»РµРЅРЅРѕРіРѕ РЅРѕРјРµСЂР°.
 SELECT * FROM booking
 WHERE room_id IN (
 	SELECT room_id FROM dbo.room
 	WHERE room_number = 4);
 
---Найдите все номера, которые не забронированы на определенную дату.
+--РќР°Р№РґРёС‚Рµ РІСЃРµ РЅРѕРјРµСЂР°, РєРѕС‚РѕСЂС‹Рµ РЅРµ Р·Р°Р±СЂРѕРЅРёСЂРѕРІР°РЅС‹ РЅР° РѕРїСЂРµРґРµР»РµРЅРЅСѓСЋ РґР°С‚Сѓ.
 SELECT * FROM room
 WHERE room_id NOT IN (
 	SELECT room_id FROM dbo.booking
