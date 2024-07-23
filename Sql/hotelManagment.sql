@@ -60,20 +60,20 @@ IF NOT EXISTS (SELECT * FROM sysobjects WHERE name = 'room_to_facility')
 INSERT INTO dbo.room (room_number, room_type, price_per_night, availability) 
 VALUES 
     (1, 'single', 1000, 1),
-	(2, 'double', 2000, 0),
-	(3, 'triple', 3000, 0),
-	(4, 'single', 1000, 0),
-	(5, 'double', 2000, 1),
-	(6, 'single', 1000, 1);
+    (2, 'double', 2000, 0),
+    (3, 'triple', 3000, 0),
+    (4, 'single', 1000, 0),
+    (5, 'double', 2000, 1),
+    (6, 'single', 1000, 1);
 
 INSERT INTO dbo.customer (first_name, last_name, email, phone_number) 
 VALUES 
     ('Margaret', 'Hale', 'margaret_hale@gmail.com', '+79575854598'),
-	('John', 'Thornton', 'john1845@gmail.com', '+79954849734'),
-	('Nicholas', 'Higgins', 'higginsNic@gmail.com', '+79462686843'),
-	('Neal', 'Stephenson', 'nealSteph@gmail.com', '+79072453452'),
-	('Rafael', 'Sabatini', 'rafael_sabatini@gmail.com', '+79389279473'),
-	('Andy', 'Weir', 'martian@gmail.com', '+79385927569');
+    ('John', 'Thornton', 'john1845@gmail.com', '+79954849734'),
+    ('Nicholas', 'Higgins', 'higginsNic@gmail.com', '+79462686843'),
+    ('Neal', 'Stephenson', 'nealSteph@gmail.com', '+79072453452'),
+    ('Rafael', 'Sabatini', 'rafael_sabatini@gmail.com', '+79389279473'),
+    ('Andy', 'Weir', 'martian@gmail.com', '+79385927569');
 
 INSERT INTO dbo.booking (customer_id, room_id, check_in_date, check_out_date) 
 VALUES 
@@ -88,33 +88,33 @@ VALUES
 INSERT INTO dbo.facility(facility_name) 
 VALUES 
     ('air-conditioning'),
-	('cable TV'),
-	('hairdryer'),
-	('in-room internet'),
-	('refrigerator'),
-	('bathrobes'),
-	('slippers'),
-	('minibar');
+    ('cable TV'),
+    ('hairdryer'),
+    ('in-room internet'),
+    ('refrigerator'),
+    ('bathrobes'),
+    ('slippers'),
+    ('minibar');
 
 INSERT INTO dbo.room_to_facility(facility_id, room_id) 
 VALUES 
     (1, 1),
-	(1, 3),
-	(1, 5),
-	(2, 1),
-	(2, 2),
-	(2, 4),
-	(3, 2),
-	(3, 3),
-	(4, 1),
-	(4, 6),
-	(5, 4),
-	(5, 5),
-	(6, 3),
-	(6, 4),
-	(7, 1),
-	(7, 6),
-	(8, 3);
+    (1, 3),
+    (1, 5),
+    (2, 1),
+    (2, 2),
+    (2, 4),
+    (3, 2),
+    (3, 3),
+    (4, 1),
+    (4, 6),
+    (5, 4),
+    (5, 5),
+    (6, 3),
+    (6, 4),
+    (7, 1),
+    (7, 6),
+    (8, 3);
 
 --Найдите все доступные номера для бронировани¤ сегодня.
 SELECT * FROM dbo.room 
