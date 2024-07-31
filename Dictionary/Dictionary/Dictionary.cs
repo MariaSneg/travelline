@@ -24,7 +24,7 @@
         string translation;
         if ( !_dict.TryGetValue( word, out translation ) && !_reverseDict.TryGetValue( word, out translation ) )
         {
-            return "";
+            return string.Empty;
         }
         return translation;
     }

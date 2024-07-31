@@ -7,7 +7,7 @@ string command = "";
 while ( command != "3" )
 {
     PrintMenu();
-    command = Console.ReadLine();
+    command = ReadNonEmptyInput();
     switch ( command )
     {
         case "1":
@@ -37,13 +37,13 @@ void PrintMenu()
 void TranslateWord()
 {
     Console.WriteLine( "Введите слово:" );
-    string word = Console.ReadLine().ToLower();
+    string word = ReadNonEmptyInput().ToLower();
 
     string translation = dict.TranslateWord( word );
-    if ( translation == "" )
+    if ( string.IsNullOrWhiteSpace( translation ) )
     {
         Console.WriteLine( "Неизвестное слово. Добавить его в словарь? Для согласия введите Y или y" );
-        string answer = Console.ReadLine().ToLower();
+        string answer = ReadNonEmptyInput().ToLower();
         if ( answer == "y" )
         {
             NewWord();
@@ -58,13 +58,28 @@ void TranslateWord()
 void NewWord()
 {
     Console.WriteLine( "Введите новое слово на английском" );
-    string newWord = Console.ReadLine();
+    string newWord = ReadNonEmptyInput();
 
     Console.WriteLine( "Введите слово на русском" );
-    string newTranslation = Console.ReadLine();
+    string newTranslation = ReadNonEmptyInput();
 
     if ( dict.AddNewWord( newWord, newTranslation ) )
     {
         Console.WriteLine( "Слово добавлено в словарь" );
     }
+}
+
+string ReadNonEmptyInput()
+{
+    string input;
+    do
+    {
+        input = Console.ReadLine();
+        if ( string.IsNullOrWhiteSpace( input ) )
+        {
+            Console.WriteLine( "Ввод не может быть пустым" );
+        }
+    } while ( string.IsNullOrWhiteSpace( input ) );
+
+    return input;
 }
