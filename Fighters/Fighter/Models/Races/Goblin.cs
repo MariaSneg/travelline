@@ -1,6 +1,10 @@
 ﻿namespace Fighters.Models.Races;
 internal class Goblin : IRace
 {
+    public string Name
+    {
+        get => "Goblin";
+    }
     public int Health
     {
         get => 40;

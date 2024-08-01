@@ -5,15 +5,14 @@ using Fighters.Models.Weapons;
 namespace Fighters.Models.Fighters;
 public class Fighter : IFighter
 {
-    public IRace Race { get; }
+    public string Name { get; private set; }
+    public IRace Race { get; private set; }
     public IArmor Armor { get; private set; }
     public IWeapon Weapon { get; private set; }
     public int CurrentHealth { get; private set; }
 
     public int ClassHealth { get; protected set; }
     public int ClassDamage { get; protected set; }
-
-    public string Name { get; private set; }
 
     public Fighter( string name, IRace race, IArmor armor, IWeapon weapon )
     {
@@ -53,5 +52,17 @@ public class Fighter : IFighter
         }
 
         CurrentHealth = newHealth;
+    }
+
+    public bool IsAlive() => CurrentHealth > 0;
+
+    public void Print()
+    {
+        Console.WriteLine( $"Name: {Name}" );
+        Console.WriteLine( $"Race: {Race.Name}" );
+        Console.WriteLine( $"Armor: {Armor.Name}" );
+        Console.WriteLine( $"Weapon: {Weapon.Name}" );
+        Console.WriteLine( $"Current health: {GetCurrentHealth()}" );
+        Console.WriteLine( $"Max health: {GetMaxHealth()}" );
     }
 }

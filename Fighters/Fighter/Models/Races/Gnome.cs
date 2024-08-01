@@ -1,6 +1,10 @@
 ﻿namespace Fighters.Models.Races;
 internal class Gnome : IRace
 {
+    public string Name
+    {
+        get => "Gnome";
+    }
     public int Health
     {
         get => 35;

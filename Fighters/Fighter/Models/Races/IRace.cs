@@ -2,7 +2,8 @@
 
 public interface IRace
 {
-    public int Health {  get; }
+    public string Name { get; }
+    public int Health { get; }
     public int Damage { get; }
     public int Armor { get; }
 }
