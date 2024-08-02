@@ -8,7 +8,9 @@ public class Barbarian : Fighter
     public Barbarian( string name, IRace race, IArmor armor, IWeapon weapon )
         : base( name, race, armor, weapon )
     {
-        ClassHealth = 56;
+        ClassHealth = 86;
         ClassDamage = 13;
+
+        CurrentHealth = GetMaxHealth();
     }
 }

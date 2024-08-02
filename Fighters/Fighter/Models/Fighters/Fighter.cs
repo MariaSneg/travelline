@@ -9,8 +9,8 @@ public class Fighter : IFighter
     public IRace Race { get; private set; }
     public IArmor Armor { get; private set; }
     public IWeapon Weapon { get; private set; }
-    public int CurrentHealth { get; private set; }
 
+    public int CurrentHealth { get; protected set; }
     public int ClassHealth { get; protected set; }
     public int ClassDamage { get; protected set; }
 
@@ -20,8 +20,6 @@ public class Fighter : IFighter
         Race = race;
         Armor = armor;
         Weapon = weapon;
-
-        CurrentHealth = GetMaxHealth();
     }
 
     public void SetArmor( IArmor armor )

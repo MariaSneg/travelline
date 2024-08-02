@@ -10,16 +10,16 @@ namespace Fighters
 
         public void Game()
         {
-            PrintMenu();
-            string command = "addFighter";
+            string command = "add";
             while ( command != "exit" )
             {
+                PrintMenu();
                 try
                 {
                     command = Console.ReadLine();
                     switch ( command )
                     {
-                        case "addFighter":
+                        case "add":
                             AddNewFighter();
                             break;
                         case "battle":
@@ -61,6 +61,7 @@ namespace Fighters
             int firstIndex = -1;
             int secondIndex = -1;
 
+            PrintFightersName();
             Console.WriteLine( "Введите номер первого бойца:" );
             if ( !int.TryParse( Console.ReadLine(), out firstIndex ) || firstIndex < 0 || firstIndex >= _fighters.Count )
             {
@@ -77,13 +78,21 @@ namespace Fighters
             Console.WriteLine( $"Победил: {winner.Name}" );
         }
 
+        private void PrintFightersName()
+        {
+            for ( int i = 0; i < _fighters.Count; i++ )
+            {
+                Console.WriteLine( $"{i}: {_fighters[ i ].Name}" );
+            }
+        }
+
         private void AddNewFighter()
         {
             _fighters.Add( _fighterCreator.CreateNewFighter() );
             Console.WriteLine( "Боец добавлен" );
         }
 
-        public void PrintMenu()
+        private void PrintMenu()
         {
             Console.WriteLine( "Меню" );
             Console.WriteLine( "add - добавить бойца" );

@@ -8,7 +8,9 @@ public class Magician : Fighter
     public Magician( string name, IRace race, IArmor armor, IWeapon weapon )
         : base( name, race, armor, weapon )
     {
-        ClassHealth = 67;
+        ClassHealth = 89;
         ClassDamage = 12;
+
+        CurrentHealth = GetMaxHealth();
     }
 }

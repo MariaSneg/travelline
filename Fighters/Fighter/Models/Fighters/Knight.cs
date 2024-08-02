@@ -8,7 +8,9 @@ public class Knight : Fighter
     public Knight( string name, IRace race, IArmor armor, IWeapon weapon )
         : base( name, race, armor, weapon )
     {
-        ClassHealth = 67;
+        ClassHealth = 97;
         ClassDamage = 14;
+
+        CurrentHealth = GetMaxHealth();
     }
 }
